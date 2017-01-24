@@ -8,7 +8,9 @@ namespace :bot do
         puts "========"
         puts message.inspect
         puts "========"
-        IncomingMessage.create(message_id: message.message_id, chat_id: message.chat.id, message_text: message.text, content: message)
+        unless existing_message = IncomingMessage.where(message_id: message.message_id).any?
+          IncomingMessage.create(message_id: message.message_id, chat_id: message.chat.id, message_text: message.text, content: message)
+        end
       end
     end
   end
