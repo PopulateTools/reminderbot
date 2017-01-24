@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  command: MyString
+  chat_id: 1
+  generated_jobs_until: 2017-01-24 15:36:20
+
+two:
+  command: MyString
+  chat_id: 1
+  generated_jobs_until: 2017-01-24 15:36:20
