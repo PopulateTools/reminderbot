@@ -4,7 +4,7 @@ namespace :bot do
   desc "Process bot incoming messages"
   task process_incoming_messages: :environment do
     Telegram::Bot::Client.run(Rails.application.secrets.telegram_bot_key) do |bot|
-      bot.fetch_updates do |message|
+      bot.listen do |message|
         puts "========"
         puts message.inspect
         puts "========"
