@@ -18,13 +18,14 @@ class IncomingMessage < ApplicationRecord
         bot.api.send_message(chat_id: chat_id, text: help_text)
       elsif message_text == '/l'
         bot.api.send_message(chat_id: chat_id, text: existing_reminders(chat_id))
-      else message_text.starts_with?('/r ')
+      elsif message_text.starts_with?('/r ')
         begin
           Reminder.create!(chat_id: chat_id, coded_string: message_text[3..-1])
           bot.api.send_message(chat_id: chat_id, text: "Guardando recordatorio...")
         rescue
           bot.api.send_message(chat_id: chat_id, text: "Error guardando recordatorio")
         end
+      else
       end
     end
   end
