@@ -8,25 +8,25 @@ class IncomingMessage < ApplicationRecord
   after_create :process
 
   def process
-    Telegram::Bot::Client.run(ENV["REMINDER_BOT_KEY"]) do |bot|
-      if message_text == '/start'
-        bot.api.send_message(chat_id: chat_id, text: "Hola, #{self.content.from.first_name}")
-        bot.api.send_message(chat_id: chat_id, text: help_text)
-      elsif message_text == '/stop'
-        bot.api.send_message(chat_id: chat_id, text: "Adiós, #{self.content.from.first_name}")
-      elsif message_text == '/help'
-        bot.api.send_message(chat_id: chat_id, text: help_text)
-      elsif message_text == '/l'
-        bot.api.send_message(chat_id: chat_id, text: existing_reminders(chat_id))
-      elsif message_text.starts_with?('/r ')
-        begin
-          Reminder.create!(chat_id: chat_id, coded_string: message_text[3..-1])
-          bot.api.send_message(chat_id: chat_id, text: "Guardando recordatorio...")
-        rescue
-          bot.api.send_message(chat_id: chat_id, text: "Error guardando recordatorio")
-        end
-      else
+    if message_text == '/start'
+      Bot.send_message(chat_id, "Hola, #{self.content.from.first_name}")
+      Bot.send_message(chat_id, help_text)
+    elsif message_text == '/stop'
+      Bot.send_message(chat_id, "Adiós, #{self.content.from.first_name}")
+    elsif message_text == '/help'
+      Bot.send_message(chat_id, help_text)
+    elsif message_text == '/l'
+      Bot.send_message(chat_id, existing_reminders(chat_id))
+    elsif message_text.starts_with?('/r ')
+      begin
+        Reminder.create!(chat_id: chat_id, coded_string: message_text[3..-1])
+        Bot.send_message(chat_id, "Guardando recordatorio...")
+      rescue
+        Bot.send_message(chat_id, "Error guardando recordatorio")
       end
+    else
+      Bot.send_message(chat_id, "No te entiendo")
+      Bot.send_message(chat_id, help_text)
     end
   end
 
@@ -44,7 +44,7 @@ class IncomingMessage < ApplicationRecord
   def help_text
 <<-HELP_TEXT
 Para guardar un recordatorio (dias y horas separadas por comas):
-/r M,J|18:25|Mensaje que quieres recibir
+/r M,X,J|18:25|Mensaje que quieres recibir
 
 Para ver los recordatorios que tienes guardados:
 /l
