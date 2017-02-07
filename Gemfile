@@ -56,3 +56,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'telegram-bot-ruby'
 gem 'delayed_job_active_record'
 gem 'ice_cube'
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rails-console'
+  gem 'capistrano-rails-log'
+end
