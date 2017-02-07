@@ -55,6 +55,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'telegram-bot-ruby'
 gem 'delayed_job_active_record'
+gem 'daemons'
 gem 'ice_cube'
 
 group :development do
@@ -65,4 +66,5 @@ group :development do
   gem 'capistrano-passenger'
   gem 'capistrano-rails-console'
   gem 'capistrano-rails-log'
+  gem 'capistrano3-delayed-job'
 end
