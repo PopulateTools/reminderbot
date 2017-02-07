@@ -13,5 +13,7 @@ module Reminderbot
     # -- all .rb files in that directory are automatically loaded.
 
     config.active_job.queue_adapter = :delayed_job
+
+    config.time_zone = 'Madrid'
   end
 end
