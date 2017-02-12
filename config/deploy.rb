@@ -9,3 +9,4 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.3.1'
 set :rbenv_path, '/home/ubuntu/.rbenv'
 set :passenger_restart_with_touch, true
+set :delayed_job_prefix, 'reminderbot'
